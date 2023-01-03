@@ -1,15 +1,14 @@
 # README
-
-### Dependences
+## Dependences
 - Ruby: 3.0.4
 - Rails: 7.0.4
 
-### Environment
+## Environment
 ```
 $ cp .env.example .env
 ```
 
-### Run app
+## Run app
 - run in local
 
 	```
@@ -32,13 +31,19 @@ $ cp .env.example .env
 	docker exec -ti rails bundle exec rake db:create db:migrate db:seed
 	```
 
-### Run Rspec
+## Run rspec
 
 ```
 bundle exec rspec
 ```
 
-### Get access token
+## Run rubocop
+
+```
+bundle exec rubocop
+```
+
+## Get access token
 - in local
 
 	```
@@ -64,28 +69,86 @@ bundle exec rspec
 	```
 
 	> NOTE: You can use this access_token to using API
-	> eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjI3NzMsImp0aSI6IjNiYWVlMDQ1LTQyMWItNDAyOS1iOWYxLWE1Zjk3ZTMxZDE0MiIsInN1YiI6MX0.La8nhxnzuQdzTYPDqSywPpZAUKygBKx4znAyJyu9giM
+	> eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjA3MDEsImp0aSI6IjZlYWU5MzUzLWFkZDUtNDg5Ni05YzUzLTE4YTg4YzVjMjUwMiIsInN1YiI6MX0.F2P5OEg76wFnMSixMy8gt8_gecZVPIWEQpxD8IdQqbo
 
-### Documentation
-[Postman](https://documenter.getpostman.com/view/3235454/2s8Z711CQs)
+## Use API
+[Documentation](https://documenter.getpostman.com/view/3235454/2s8Z711CQs)
 
+Access Token 
 
-### Access token
+`eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjA3MDEsImp0aSI6IjZlYWU5MzUzLWFkZDUtNDg5Ni05YzUzLTE4YTg4YzVjMjUwMiIsInN1YiI6MX0.F2P5OEg76wFnMSixMy8gt8_gecZVPIWEQpxD8IdQqbo`
 
-- Note: You can use this access_token to access 
+### Enpoint
 
-    ```
-    eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjI3NzMsImp0aSI6IjNiYWVlMDQ1LTQyMWItNDAyOS1iOWYxLWE1Zjk3ZTMxZDE0MiIsInN1YiI6MX0.La8nhxnzuQdzTYPDqSywPpZAUKygBKx4znAyJyu9giM
-    ```
+|                                                | METHOD        | URI              |
+| ---------------------------------------------- | --------------- | ---------------- |
+| Encodes a URL to a shortened URL           | POST| /api/v1/encode |
+| Decodes a shortened URL to its original    | GET | /api/v1/decode  |
 
-- Get access_token
+### Encodes a URL to a shortened URL
+- Enpoint
 
-    ```
-    docker exec -ti rails bundle exec rails console
-    ```
+  ```
+  POST api/v1/encode
+  ```
 
-    ```
-    [1] pry(main)> JsonWebToken.encode(sub: 1)
-    => "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjI3NzMsImp0aSI6IjNiYWVlMDQ1LTQyMWItNDAyOS1iOWYxLWE1Zjk3ZTMxZDE0MiIsInN1YiI6MX0.La8nhxnzuQdzTYPDqSywPpZAUKygBKx4znAyJyu9giM"
+- Parameter
 
-    ```
+  | Location | Required | Name | Type | Description |
+  | ---------| ---------|------|------|-------------|
+  | Headers  | true     | Authorization | string | abc|
+  | Body     | true     | origin_url    | string | That a URL can be encoded into a short URL
+  | Body     | optional | custom_short_url | string | User can custom short_url
+
+- Example
+
+  request
+  ```shell
+  curl --location -g --request POST '{{base_url}}/api/v1/encode' \
+  --header 'Authorization: Bearer {{access_token}}x' \
+  --data-raw '{
+      "origin_url": "https://stackoverflow.com/questions/22623656/how-to-redirect-to-and-return-a-200-status-code",
+      "custom_short_url": "xsxXXZZX"
+  }'
+  ```
+  
+  response
+
+  ```json
+   {
+      "short_url": "localhost:3000/CustomUrl"
+   }
+  ```
+
+### Decodes a shortened URL to its original
+- Enpoint
+
+  ```
+  GET api/v1/decode
+  ```
+
+- Parameter
+
+  | Location | Required | Name | Type | Description |
+  | ---------| ---------|------|------|-------------|
+  | Headers  | true     | Authorization | string | abc|
+  | Body     | true     | short_url    | string | That a URL can be decoded into a origin URL
+
+- Example
+
+  request
+  ```shell
+  curl --location -g --request GET '{{base_url}}/api/v1/decode?short_url=quEfUy' \
+  --header 'Authorization: {{access_token}} c' \
+  --data-raw '{
+      "origin_url": "https://stackoverflow.com/questions/22623656/how-to-redirect-to-and-return-a-200-status-code"
+  }'
+  ```
+  
+  response
+
+  ```json
+  {
+    "origin_url": "https://stackoverflow.com/questions/1/test"
+  }
+  ```
