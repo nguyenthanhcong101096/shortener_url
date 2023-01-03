@@ -22,11 +22,11 @@ module ShortenerUrlCommands
     attr_reader(:user, :params)
 
     def generate_hash_id
-      ShortenerUrl.get_hash_id(short_url)
+      @generate_hash_id ||= ShortenerUrl.get_hash_id(short_url)
     end
 
     def short_url
-      ShortenerUrl.encode(custom_short_url: params[:custom_short_url])
+      @short_url ||= ShortenerUrl.encode(custom_short_url: params[:custom_short_url])
     end
 
     def valid

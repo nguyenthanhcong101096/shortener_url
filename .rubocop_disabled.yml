@@ -1,0 +1,9 @@
+Style/ClassAndModuleChildren:
+  Description: "Checks style of children classes and modules."
+  Enabled: false
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+RSpec/MultipleExpectations:
+  Description: "Only once expectaion in the block"
+  Enabled: false

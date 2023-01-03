@@ -7,9 +7,9 @@ module Api
         cmd = ShortenerUrlCommands::Show.call(short_url: params[:short_url])
 
         if cmd.success?
-          render json: { origin_url: cmd.result }, status: :ok
+          render json: {origin_url: cmd.result}, status: :ok
         else
-          render json: { errors: cmd.errors.full_messages }, status: :unprocessable_entity
+          render json: {errors: cmd.errors.full_messages}, status: :unprocessable_entity
         end
       end
 
@@ -17,9 +17,9 @@ module Api
         cmd = ShortenerUrlCommands::Create.call(user: current_user, params: params)
 
         if cmd.success?
-          render json: { short_url: [request.env['HTTP_HOST'], cmd.result].join('/') }, status: :ok
+          render json: {short_url: [request.env["HTTP_HOST"], cmd.result].join("/")}, status: :ok
         else
-          render json: { errors: cmd.errors.full_messages }, status: :unprocessable_entity
+          render json: {errors: cmd.errors.full_messages}, status: :unprocessable_entity
         end
       end
     end

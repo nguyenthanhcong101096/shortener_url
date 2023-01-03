@@ -265,6 +265,8 @@ GEM
       rubocop (~> 1.0)
     rubocop-rspec (2.16.0)
       rubocop (~> 1.33)
+    rubocop-thread_safety (0.4.4)
+      rubocop (>= 0.53.0)
     ruby-progressbar (1.11.0)
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
@@ -330,6 +332,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.12, >= 2.12.2)
   rubocop-rake (~> 0.6.0)
   rubocop-rspec (~> 2.10)
+  rubocop-thread_safety
   shoulda-matchers
   simple_command
   simplecov

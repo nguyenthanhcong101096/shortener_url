@@ -2,7 +2,7 @@
 
 class ShortenerUrl
   class << self
-    BASE62      = [*0..9, *'a'..'z', *'A'..'Z'].freeze
+    BASE62      = [*0..9, *"a".."z", *"A".."Z"].freeze
     BASE        = BASE62.length
     CODE_LENGTH = 6
 
@@ -16,7 +16,7 @@ class ShortenerUrl
       short_url.chars.each_with_index do |c, i|
         index = BASE62.join.index(c)
 
-        return if index.negative?
+        break if index.negative?
 
         hash_id += index * (CODE_LENGTH**(6 - i - 1))
       end
