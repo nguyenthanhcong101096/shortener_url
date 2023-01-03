@@ -104,8 +104,8 @@ Access Token
 
   request
   ```shell
-  curl --location -g --request POST '{{base_url}}/api/v1/encode' \
-  --header 'Authorization: Bearer {{access_token}}x' \
+  curl --location -g --request POST 'https://serene-atoll-96535.herokuapp.com/api/v1/encode' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjA3MDEsImp0aSI6IjZlYWU5MzUzLWFkZDUtNDg5Ni05YzUzLTE4YTg4YzVjMjUwMiIsInN1YiI6MX0.F2P5OEg76wFnMSixMy8gt8_gecZVPIWEQpxD8IdQqbo' \
   --data-raw '{
       "origin_url": "https://stackoverflow.com/questions/22623656/how-to-redirect-to-and-return-a-200-status-code",
       "custom_short_url": "xsxXXZZX"
@@ -138,8 +138,8 @@ Access Token
 
   request
   ```shell
-  curl --location -g --request GET '{{base_url}}/api/v1/decode?short_url=quEfUy' \
-  --header 'Authorization: {{access_token}} c' \
+  curl --location -g --request GET 'https://serene-atoll-96535.herokuapp.com/api/v1/decode?short_url=quEfUy' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NzUyNjA3MDEsImp0aSI6IjZlYWU5MzUzLWFkZDUtNDg5Ni05YzUzLTE4YTg4YzVjMjUwMiIsInN1YiI6MX0.F2P5OEg76wFnMSixMy8gt8_gecZVPIWEQpxD8IdQqbo' \
   --data-raw '{
       "origin_url": "https://stackoverflow.com/questions/22623656/how-to-redirect-to-and-return-a-200-status-code"
   }'

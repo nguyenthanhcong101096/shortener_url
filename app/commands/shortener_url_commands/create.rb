@@ -6,7 +6,7 @@ module ShortenerUrlCommands
 
     def initialize(user:, params: {})
       @user   = user
-      @params = params
+      @params = params.symbolize_keys
     end
 
     def call
